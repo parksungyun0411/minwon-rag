@@ -1,0 +1,15 @@
+# 선택 어휘 백엔드(OpenSearch + nori). 미검증 — 개발 환경에 Docker가 없어 띄워 보지 않았다.
+# 사용: docker compose up -d  →  .env 에 LEXICAL_BACKEND=opensearch  →  uv sync --extra opensearch  →  make index eval
+services:
+  opensearch:
+    build: ./docker/opensearch
+    environment:
+      - discovery.type=single-node
+      - DISABLE_SECURITY_PLUGIN=true
+      - OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g
+    ports:
+      - "9200:9200"
+    volumes:
+      - osdata:/usr/share/opensearch/data
+volumes:
+  osdata:
