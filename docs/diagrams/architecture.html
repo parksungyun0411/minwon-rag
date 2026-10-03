@@ -1,0 +1,50 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>minwon-rag · 아키텍처</title><style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#f4f6f8}
+body{font-family:"Apple SD Gothic Neo","Noto Sans KR",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;padding:24px}
+.d{width:952px;background:#fff;border:1px solid #dfe3e8;border-radius:14px;padding:26px 28px}
+.t{font-size:12px;font-weight:800;color:#8a94a3;letter-spacing:.05em;margin-bottom:18px}
+.t b{color:#14532d}
+.row{display:flex;gap:14px;align-items:stretch}
+.lab{flex:0 0 88px;display:flex;flex-direction:column;justify-content:center}
+.lab .en{font-size:10.5px;font-weight:800;color:#8a94a3;letter-spacing:.06em}
+.lab .ko{font-size:13px;font-weight:700;color:#2f3a48;margin-top:2px}
+.lane{flex:1;display:flex;align-items:center;gap:9px;border:1.5px solid #e5e9ee;border-radius:12px;background:#fafbfc;padding:12px 14px}
+.box{background:#fff;border:1.5px solid #cfd6df;border-radius:9px;padding:9px 12px;color:#2f3a48}
+.box .n{font-size:14.5px;font-weight:800}
+.box .s{font-size:11.5px;color:#6b7480;margin-top:3px}
+.g{flex:1}
+.ar{color:#a9b2bd;font-size:17px}
+.down{color:#c5ccd5;font-size:15px;padding:4px 0 4px 102px}
+.lex{background:#fff8ee;border-color:#f3d3a6}
+.den{background:#eef5ff;border-color:#bcd4f6}
+.hyb{background:#f3f0ff;border-color:#d6ccf7}
+.rr{background:#fdf0f3;border-color:#f2c4cf}
+.ev{background:#ecf8f0;border-color:#b6e0c3}
+.ext{background:#f1f3f5;border-style:dashed}
+.note{font-size:11.5px;color:#7a8390;margin-top:14px}
+</style></head><body><div class="d">
+<div class="t"><b>minwon-rag</b> · 수집부터 평가까지</div>
+<div class="row"><div class="lab"><div class="en">COLLECT</div><div class="ko">수집</div></div>
+<div class="lane"><div class="box ext"><div class="n">data.go.kr 15074671</div><div class="s">PolicyQnaList · PolicyQnaItem</div></div><span class="ar">→</span>
+<div class="box g"><div class="n">collect</div><div class="s">일일 호출 예산 · 이어 받기 · 재시도</div></div><span class="ar">→</span>
+<div class="box g"><div class="n">normalize</div><div class="s">HTML 이스케이프 해제 · 정형 인사말 제거</div></div></div></div>
+<div class="down">↓</div>
+<div class="row"><div class="lab"><div class="en">SPLIT</div><div class="ko">분할·라벨</div></div>
+<div class="lane"><div class="box"><div class="n">시점 분할</div><div class="s">신청일 기준일</div></div><span class="ar">→</span>
+<div class="box g"><div class="n">코퍼스</div><div class="s">기준일 이전 민원</div></div>
+<div class="box g"><div class="n">실제 질의 골든셋</div><div class="s">기준일 이후 150건 · 인용 법령 자동 라벨</div></div></div></div>
+<div class="down">↓</div>
+<div class="row"><div class="lab"><div class="en">RETRIEVE</div><div class="ko">검색</div></div>
+<div class="lane"><div style="display:flex;flex-direction:column;gap:8px;flex:0 0 250px">
+<div class="box lex"><div class="n">Kiwi + BM25</div><div class="s">프로세스 내 · OpenSearch 선택</div></div>
+<div class="box den"><div class="n">dense</div><div class="s">KURE-v1 · bge-m3 · 전수 탐색</div></div></div>
+<span class="ar">→</span><div class="box hyb g"><div class="n">RRF 하이브리드</div><div class="s">k = 60 · 순위만 결합</div></div>
+<span class="ar">→</span><div class="box rr g"><div class="n">크로스인코더 리랭커</div><div class="s">bge-reranker-v2-m3 · 상위 50건</div></div></div></div>
+<div class="down">↓</div>
+<div class="row"><div class="lab"><div class="en">EVALUATE</div><div class="ko">평가</div></div>
+<div class="lane"><div class="box ev g"><div class="n">rag-eval-harness · run_matrix</div><div class="s">설정 7종 × 골든셋 · 질의별 지표·지연</div></div><span class="ar">→</span>
+<div class="box"><div class="n">results/per_query.jsonl</div><div class="s">원자료</div></div><span class="ar">→</span>
+<div class="box"><div class="n">reports/</div><div class="s">표 · Wilson · McNemar · 그림</div></div></div></div>
+<div class="note">점선 상자는 외부 시스템. 평가 코드는 복사하지 않고 rag-eval-harness 패키지를 의존성으로 사용.</div>
+</div></body></html>
