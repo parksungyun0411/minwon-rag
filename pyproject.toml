@@ -2,6 +2,7 @@
 name = "minwon-rag"
 version = "0.1.0"
 description = "국민권익위 민원정책 질의응답의 실제 시민 질의로 재는 dense → 하이브리드 → 리랭커 검색 실험"
+readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "박성윤" }]
 requires-python = ">=3.10"
