@@ -1,0 +1,2 @@
+<!-- SYNTHETIC: 형식 가정용 수동 작성 오류 응답, 실제 응답 아님 -->
+<OpenAPI_ServiceResponse><cmmMsgHeader><errMsg>SERVICE ERROR</errMsg><returnAuthMsg>SERVICE_KEY_IS_NOT_REGISTERED_ERROR</returnAuthMsg><returnReasonCode>30</returnReasonCode></cmmMsgHeader></OpenAPI_ServiceResponse>

@@ -1,0 +1,4 @@
+{"_fixture": "SYNTHETIC — 수동 작성, 수집 데이터 아님", "resultCode": "S00", "resultMessage": "1(건) 조회되었습니다.", "resultCount": "3",
+ "resultList": [
+  {"dutySctnNm": "tqapttn", "ancCode": "9990001", "ancName": "가상기관A", "regDate": "20250301101010", "title": "가상 민원 제목 3", "faqNo": "1003"}
+ ]}
