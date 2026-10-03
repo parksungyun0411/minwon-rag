@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+.env
+.DS_Store
+# 수집 원본·색인은 용량이 크고 재생성 가능하므로 커밋하지 않는다
+data/
+results/runs/
