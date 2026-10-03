@@ -1,0 +1,35 @@
+# 검색 설정 매트릭스. 이름 순서가 보고서 표의 행 순서다.
+# dense: models 의 별칭 / lexical: 어휘 검색 사용 여부 / rerank: models 의 별칭
+ks: [1, 5, 10, 20]
+depth: 100
+rrf_k: 60
+rerank_candidates: 50
+baseline: dense-kure
+answer_config: hybrid-kure-rerank
+
+models:
+  kure: nlpai-lab/KURE-v1
+  bge-m3: BAAI/bge-m3
+  bge-reranker: BAAI/bge-reranker-v2-m3
+
+configs:
+  - name: bm25
+    lexical: true
+  - name: dense-kure
+    dense: kure
+  - name: dense-bge-m3
+    dense: bge-m3
+  - name: hybrid-kure
+    dense: kure
+    lexical: true
+  - name: hybrid-bge-m3
+    dense: bge-m3
+    lexical: true
+  - name: hybrid-kure-rerank
+    dense: kure
+    lexical: true
+    rerank: bge-reranker
+  - name: hybrid-bge-m3-rerank
+    dense: bge-m3
+    lexical: true
+    rerank: bge-reranker
