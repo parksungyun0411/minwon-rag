@@ -12,14 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # rag-eval-harness 가 비공개인 동안은 읽기 권한 토큰(HARNESS_TOKEN)이 필요하다. 공개 후에는 없어도 된다.
-      - name: harness 접근 설정
-        env:
-          HARNESS_TOKEN: ${{ secrets.HARNESS_TOKEN }}
-        run: |
-          if [ -n "$HARNESS_TOKEN" ]; then
-            git config --global url."https://x-access-token:${HARNESS_TOKEN}@github.com/".insteadOf "https://github.com/"
-          fi
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
