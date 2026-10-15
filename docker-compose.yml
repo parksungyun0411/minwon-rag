@@ -8,7 +8,7 @@ services:
       - DISABLE_SECURITY_PLUGIN=true
       - OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g
     ports:
-      - "9200:9200"
+      - "127.0.0.1:9200:9200"  # 보안 플러그인을 껐으므로 로컬에서만 연다
     volumes:
       - osdata:/usr/share/opensearch/data
 volumes:
