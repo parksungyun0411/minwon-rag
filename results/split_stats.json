@@ -1,0 +1,15 @@
+{
+  "cutoff": "2026-07-31",
+  "records": 16715,
+  "corpus": 14858,
+  "after_cutoff": 1851,
+  "after_cutoff_with_laws": 1828,
+  "eligible": 924,
+  "labels": {
+    "queries": 150,
+    "relevant_min": 1,
+    "relevant_median": 14,
+    "relevant_max": 96,
+    "with_strong": 132
+  }
+}

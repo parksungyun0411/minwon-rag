@@ -1,6 +1,6 @@
 # reports/
 
-측정 전 — `make eval` 실행 후 자동 생성
+2026-10-27 측정분. 실행 환경은 [docs/kaggle_t4.md](../docs/kaggle_t4.md).
 
 `make report` 가 아래 파일을 이 디렉터리에 씁니다. 손으로 숫자를 적지 않습니다.
 
