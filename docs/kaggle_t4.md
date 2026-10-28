@@ -1,6 +1,6 @@
 # Kaggle T4 실행 기록
 
-2026-10-27에 색인(`make index`)과 평가(`make eval`)를 Kaggle 무료 GPU에서 돌린 절차와 환경이다.
+2026-10-27에 색인(`minwon index`)과 평가(`minwon eval`)를 Kaggle 무료 GPU에서 돌린 절차와 환경이다.
 수집(`make collect`)과 시점 분할(`make split`)은 로컬에서 했고, 보고서(`make report`)도 로컬에서 받은 `results/`로 만들었다.
 결과 표는 [README](../README.md#평가)와 [reports/retrieval.md](../reports/retrieval.md).
 
@@ -40,5 +40,5 @@ cp -R out/out/results/. results/ && make report
 
 ## 기록에 남은 실수
 
-- 이 실행의 `logs/freeze.txt`는 `.venv`가 아니라 Kaggle 기본 파이썬의 패키지 목록을 찍었다. 실제 실행 환경은 uv.lock이고, 같은 로그의 torch 버전(2.14.1+cu130)이 uv.lock과 같은 것으로 확인했다. `scripts/kaggle_t4.py`는 `.venv`를 찍도록 고쳤다.
+- 이 실행의 `logs/freeze.txt`는 `.venv`가 아니라 Kaggle 기본 파이썬의 패키지 목록을 찍었다. 실제 실행 환경은 uv.lock이고, `.venv` 파이썬으로 찍은 `logs/models.txt`의 torch 버전(2.14.1+cu130)이 uv.lock(2.14.1)과 같은 것으로 확인했다. `scripts/kaggle_t4.py`는 `.venv`를 찍도록 고쳤다.
 - 최대 메모리를 남기려던 `/usr/bin/time -v`는 커널 이미지에 없어 기록되지 않았다.

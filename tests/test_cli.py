@@ -66,3 +66,4 @@ def test_split_synth_report(tmp_path, monkeypatch):
     path = render_data_report(stats, [real, syn], tmp_path / "reports")
     text = path.read_text(encoding="utf-8")
     assert "`real`" in text and "`synthetic`" in text
+    assert "| `real` | 2 | 2 | 2 | 2 | 3 | 1 |" in text  # 관련 판정 3쌍 중 grade 1은 q1-c2 하나

@@ -17,8 +17,8 @@ def render_data_report(
     rows = [
         ("정규화 레코드", stats["records"]),
         ("분할 기준일", stats["cutoff"]),
-        ("코퍼스 (기준일 이전, 답변 있음)", stats["corpus"]),
-        ("기준일 이후 민원", stats["after_cutoff"]),
+        ("코퍼스 (기준일 전, 답변 있음)", stats["corpus"]),
+        ("기준일 당일부터의 민원", stats["after_cutoff"]),
         ("└ 인용 법령 있음", stats["after_cutoff_with_laws"]),
         ("└ 자동 라벨 가능 (관련 1~상한 건)", stats["eligible"]),
     ]
@@ -28,15 +28,18 @@ def render_data_report(
         "",
         "## 골든셋",
         "",
-        "| 골든셋 | 질의 | 관련 문서 중앙값 | 관련 문서 최대 | grade 2 포함 질의 |",
+        "| 골든셋 | 질의 | 관련 문서 중앙값 | 관련 문서 최대 | grade 2 포함 질의 "
+        "| 관련 판정(질의·문서 쌍) | grade 1 판정 |",
     ]
-    lines += ["|---|---|---|---|---|"]
+    lines += ["|---|---|---|---|---|---|---|"]
     for g in goldens:
         sizes = sorted(len([d for d, v in g.qrels[q].items() if v > 0]) for q in g.judged_qids())
         strong = sum(1 for q in g.judged_qids() if 2 in g.qrels[q].values())
+        weak = sum(1 for q in g.judged_qids() for v in g.qrels[q].values() if v == 1)
         if sizes:
             lines.append(
-                f"| `{g.name}` | {len(sizes)} | {sizes[len(sizes) // 2]} | {sizes[-1]} | {strong} |"
+                f"| `{g.name}` | {len(sizes)} | {sizes[len(sizes) // 2]} | {sizes[-1]} | {strong} "
+                f"| {sum(sizes)} | {weak} |"
             )
     path = out / "data.md"
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
